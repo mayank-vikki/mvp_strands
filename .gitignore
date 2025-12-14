@@ -68,3 +68,13 @@ env/
 # ------------------------------------------------------------------------------
 .DS_Store
 Thumbs.db
+
+# ------------------------------------------------------------------------------
+# Documentation Files (Local Use Only)
+# ------------------------------------------------------------------------------
+DEPLOYMENT.md
+FINAL_CHECKLIST.md
+GITHUB_PUSH_GUIDE.md
+README_DEPLOYMENT.md
+SETUP_COMPLETE.md
+Supervisor.md
