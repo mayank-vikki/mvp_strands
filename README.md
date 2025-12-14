@@ -26,8 +26,7 @@
 - [Orchestration Modes](#-orchestration-modes)
   - [Mode 1: Agents-as-Tools (Default)](#mode-1-agents-as-tools-default)
   - [Mode 2: Swarm Orchestration](#mode-2-swarm-orchestration)
-  - [Mode 3: Graph Workflows](#mode-3-graph-workflows)
-  - [Mode 4: Agentic Supervisor](#mode-4-agentic-supervisor-full-autonomous)
+  - [Mode 3: LangGraph Agent](#mode-3-langgraph-agent-advanced-autonomous)
 - [Components Deep Dive](#-components-deep-dive)
 - [Data Flow](#-data-flow)
 - [Usage](#-usage)
@@ -42,7 +41,7 @@ This project demonstrates a **production-ready Multi-Agent AI System** designed 
 
 - **Multi-Agent Orchestration** - Multiple AI agents collaborating to solve complex queries
 - **Tool-Augmented LLMs** - Agents equipped with specialized tools for real-world tasks
-- **Agentic AI Patterns** - ReAct reasoning, goal decomposition, self-reflection, and memory
+- **LangGraph-Powered Agentic AI** - Graph-based agent workflows with ReAct reasoning patterns
 - **AWS Bedrock Integration** - Powered by Amazon Nova Pro foundation model
 
 ### Why Multi-Agent Systems?
@@ -83,11 +82,10 @@ Reviews Tools     → get_product_reviews, get_rating_summary, search_reviews, g
 Logistics Tools   → get_shipping_options, get_detailed_tracking, get_delivery_slots, calculate_shipping_cost, get_carrier_info
 ```
 
-### 🧠 4 Orchestration Patterns
+### 🧠 3 Orchestration Patterns
 1. **Agents-as-Tools** - Supervisor routes queries to specialists
 2. **Swarm** - Agents self-organize with dynamic handoffs
-3. **Graph Workflows** - Deterministic pipelines for complex processes
-4. **Agentic Supervisor** - Full autonomous reasoning with ReAct, planning, and reflection
+3. **LangGraph Agent** - Advanced agentic reasoning with graph-based workflows and ReAct patterns
 
 ---
 
@@ -192,13 +190,9 @@ mvp_project/
 │   │   ├── reviews_tools.py        # 5 review tools
 │   │   └── logistics_tools.py      # 5 logistics tools
 │   │
-│   ├── 📁 agentic/                 # Agentic Capabilities Module
+│   ├── 📁 agentic/                 # LangGraph Agentic Agent
 │   │   ├── __init__.py
-│   │   ├── agentic_supervisor.py   # 🧠 Full autonomous supervisor
-│   │   ├── react_agent.py          # ReAct pattern implementation
-│   │   ├── goal_planner.py         # Goal decomposition engine
-│   │   ├── reflection.py           # Self-reflection & critique
-│   │   └── memory.py               # Multi-type memory system
+│   │   └── langgraph_agent.py      # 🔷 LangGraph-based agent with ReAct patterns
 │   │
 │   ├── 📁 orchestration/           # Multi-Agent Orchestration Patterns
 │   │   ├── __init__.py
@@ -657,153 +651,90 @@ def create_order_workflow():
 
 ---
 
-### Mode 4: Agentic Supervisor (Full Autonomous)
+### Mode 3: LangGraph Agent (Advanced Autonomous)
 
-**Pattern**: Complete autonomous reasoning with ReAct, goal decomposition, self-reflection, and memory.
+**Pattern**: Graph-based agentic reasoning with ReAct patterns and built-in state management.
 
-This is the most advanced mode, integrating all agentic capabilities:
+LangGraph provides a powerful framework for building autonomous agents with:
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│                      USER QUERY                               │
-│  "Help me buy a laptop: find options, check reviews, verify │
-│   stock, compare prices, and suggest the best one"          │
+│                   USER QUERY                                  │
+│  "Help me find a gaming laptop that's in stock and under     │
+│   $1500 with good reviews"                                   │
 └───────────────────────────┬──────────────────────────────────┘
                             │
                             ▼
 ┌──────────────────────────────────────────────────────────────┐
-│              🧠 AGENTIC SUPERVISOR                            │
+│              🔷 LANGGRAPH AGENT                               │
+│                                                               │
+│  Graph-Based Workflow:                                        │
 │                                                               │
 │  ┌────────────────────────────────────────────────────────┐  │
-│  │  PHASE 1: MEMORY ASSEMBLY                              │  │
-│  │  ────────────────────────────────────────────────────  │  │
-│  │  • Check short-term memory for recent context          │  │
-│  │  • Query long-term memory for user preferences         │  │
-│  │  • Load episodic memory for similar past queries       │  │
-│  │  • Assemble working memory for current task            │  │
+│  │  THOUGHT → ACTION → OBSERVATION LOOP                   │  │
+│  │  (Powered by LangGraph's cyclic execution)             │  │
+│  │                                                         │  │
+│  │  • Explicit reasoning step before each action           │  │
+│  │  • Access to specialized agent tools                   │  │
+│  │  • Dynamic routing based on observations               │  │
+│  │  • Built-in state management across steps              │  │
 │  └────────────────────────────────────────────────────────┘  │
 │                            │                                  │
 │                            ▼                                  │
 │  ┌────────────────────────────────────────────────────────┐  │
-│  │  PHASE 2: GOAL DECOMPOSITION                           │  │
-│  │  ────────────────────────────────────────────────────  │  │
-│  │                                                         │  │
-│  │  Complex Query Decomposed Into:                         │  │
-│  │                                                         │  │
-│  │  ┌─────────────────────────────────────────────────┐   │  │
-│  │  │ Goal 1: Find laptop options [INDEPENDENT]       │   │  │
-│  │  │   → Agent: Product Agent                        │   │  │
-│  │  │   → Priority: HIGH                              │   │  │
-│  │  └─────────────────────────────────────────────────┘   │  │
-│  │            │                                            │  │
-│  │            ▼ (Dependency)                               │  │
-│  │  ┌─────────────────────────────────────────────────┐   │  │
-│  │  │ Goal 2: Check reviews [DEPENDS: Goal 1]         │   │  │
-│  │  │   → Agent: Reviews Agent                        │   │  │
-│  │  └─────────────────────────────────────────────────┘   │  │
-│  │  ┌─────────────────────────────────────────────────┐   │  │
-│  │  │ Goal 3: Verify stock [DEPENDS: Goal 1]          │   │  │
-│  │  │   → Agent: Inventory Agent                      │   │  │
-│  │  └─────────────────────────────────────────────────┘   │  │
-│  │  ┌─────────────────────────────────────────────────┐   │  │
-│  │  │ Goal 4: Compare prices [DEPENDS: Goal 1]        │   │  │
-│  │  │   → Agent: Pricing Agent                        │   │  │
-│  │  └─────────────────────────────────────────────────┘   │  │
-│  │            │                                            │  │
-│  │            ▼ (All dependencies)                         │  │
-│  │  ┌─────────────────────────────────────────────────┐   │  │
-│  │  │ Goal 5: Generate recommendation                 │   │  │
-│  │  │   [DEPENDS: Goals 2, 3, 4]                      │   │  │
-│  │  └─────────────────────────────────────────────────┘   │  │
-│  │                                                         │  │
+│  │  Step 1: SEARCH PRODUCTS                               │  │
+│  │  ─────────────────────────────                         │  │
+│  │  THOUGHT: "I need to find gaming laptops under $1500"  │  │
+│  │  ACTION: search_products("gaming laptop", max_price=1500) │
+│  │  OBSERVATION: "Found 5 laptops matching criteria"      │  │
 │  └────────────────────────────────────────────────────────┘  │
 │                            │                                  │
 │                            ▼                                  │
 │  ┌────────────────────────────────────────────────────────┐  │
-│  │  PHASE 3: ReAct EXECUTION LOOP                         │  │
-│  │  ────────────────────────────────────────────────────  │  │
-│  │                                                         │  │
-│  │  For each goal in execution_order:                      │  │
-│  │                                                         │  │
-│  │    THOUGHT → ACTION → OBSERVATION → THOUGHT → ...      │  │
-│  │                                                         │  │
-│  │    ┌─────────────────────────────────────────────┐     │  │
-│  │    │  THOUGHT: "I need to find laptop options     │     │  │
-│  │    │           first. Let me search for laptops." │     │  │
-│  │    └──────────────────┬──────────────────────────┘     │  │
-│  │                       ▼                                 │  │
-│  │    ┌─────────────────────────────────────────────┐     │  │
-│  │    │  ACTION: search_products("gaming laptop")    │     │  │
-│  │    └──────────────────┬──────────────────────────┘     │  │
-│  │                       ▼                                 │  │
-│  │    ┌─────────────────────────────────────────────┐     │  │
-│  │    │  OBSERVATION: "Found 3 laptops..."           │     │  │
-│  │    └──────────────────┬──────────────────────────┘     │  │
-│  │                       ▼                                 │  │
-│  │    ┌─────────────────────────────────────────────┐     │  │
-│  │    │  THOUGHT: "Good, now check reviews..."       │     │  │
-│  │    └─────────────────────────────────────────────┘     │  │
-│  │                                                         │  │
+│  │  Step 2: CHECK STOCK & REVIEWS                         │  │
+│  │  ──────────────────────────                            │  │
+│  │  THOUGHT: "Let me verify stock and check reviews"      │  │
+│  │  ACTION: check_stock_availability(product_ids)         │  │
+│  │  ACTION: get_product_reviews(product_ids)              │  │
+│  │  OBSERVATION: "3 in stock with 4.5+ star ratings"      │  │
 │  └────────────────────────────────────────────────────────┘  │
 │                            │                                  │
 │                            ▼                                  │
 │  ┌────────────────────────────────────────────────────────┐  │
-│  │  PHASE 4: SELF-REFLECTION                              │  │
-│  │  ────────────────────────────────────────────────────  │  │
-│  │                                                         │  │
-│  │  Critiques:                                             │  │
-│  │  • Completeness: 4/5 - "Missing warranty info"         │  │
-│  │  • Helpfulness: 5/5 - "Clear recommendation"           │  │
-│  │                                                         │  │
-│  │  Refinement: Added warranty comparison section          │  │
-│  │                                                         │  │
-│  │  Overall Quality: 4.5/5 → Threshold met                │  │
-│  │                                                         │  │
-│  └────────────────────────────────────────────────────────┘  │
-│                            │                                  │
-│                            ▼                                  │
-│  ┌────────────────────────────────────────────────────────┐  │
-│  │  PHASE 5: MEMORY UPDATE                                │  │
-│  │  ────────────────────────────────────────────────────  │  │
-│  │  • Store interaction in short-term memory              │  │
-│  │  • Update user preference (interested in laptops)      │  │
-│  │  • Create episodic summary for future reference        │  │
+│  │  Step 3: FINAL RECOMMENDATION                          │  │
+│  │  ───────────────────────────────                       │  │
+│  │  THOUGHT: "Based on all criteria, recommend the best"  │  │
+│  │  ACTION: generate_recommendation()                     │  │
+│  │  RESULT: Return ranked options with reasoning          │  │
 │  └────────────────────────────────────────────────────────┘  │
 │                                                               │
 └───────────────────────────┬──────────────────────────────────┘
                             │
                             ▼
 ┌──────────────────────────────────────────────────────────────┐
-│                    FINAL RESPONSE                             │
+│                    RESPONSE                                   │
 │                                                               │
-│  "Based on my analysis, here's my recommendation:            │
+│  "Based on my analysis:                                      │
 │                                                               │
-│   🏆 Best Overall: Gaming Pro X1 ($1,299)                    │
-│      ⭐ Reviews: 4.5/5 (89 reviews)                          │
-│      📊 Stock: 45 units available                            │
-│      💰 Price: Currently $100 off                            │
-│                                                               │
-│   Why this choice:                                            │
-│   • Best review scores for gaming                             │
-│   • In stock and ships immediately                            │
-│   • Best value with current discount"                        │
+│   🏆 Top Pick: Gaming Pro X1                                 │
+│      • Price: $1,299 (within budget)                         │
+│      • Reviews: 4.7/5 stars                                 │
+│      • Stock: 12 units available                             │
+│      • Best gaming specs in your budget"                     │
 └──────────────────────────────────────────────────────────────┘
 ```
 
-**Agentic Components:**
+**LangGraph Features:**
+- ✅ Graph-based workflow execution
+- ✅ Built-in state management
+- ✅ ReAct pattern (Thought → Action → Observation)
+- ✅ Cyclic reasoning loops (not just linear chains)
+- ✅ Conditional routing and dynamic handoffs
+- ✅ Human-in-the-loop support
 
-| Component | Purpose | File |
-|-----------|---------|------|
-| **ReAct Agent** | Explicit reasoning before actions | `agentic/react_agent.py` |
-| **Goal Planner** | Decompose complex queries | `agentic/goal_planner.py` |
-| **Self-Reflector** | Critique and improve responses | `agentic/reflection.py` |
-| **Memory System** | Maintain context across turns | `agentic/memory.py` |
-| **Agentic Supervisor** | Orchestrate all components | `agentic/agentic_supervisor.py` |
+**Implementation:**
+- `agentic/langgraph_agent.py` - Complete LangGraph-powered agent
 
-**Characteristics:**
-- ✅ Handles most complex queries
-- ✅ Transparent reasoning (explainable AI)
-- ✅ Self-improving responses
 - ✅ Context-aware across sessions
 - ❌ Higher latency
 - ❌ Higher token usage
@@ -1011,18 +942,16 @@ workflow = create_order_workflow()
 result = workflow("Order processing query")
 ```
 
-### Using Agentic Supervisor
+### Using LangGraph Agent
 
 ```python
-from agentic import AgenticSupervisor
+from agentic import LangGraphAgent
 
-supervisor = AgenticSupervisor(
-    enable_react=True,
-    enable_goals=True,
-    enable_reflection=True,
-    enable_memory=True
-)
-result = supervisor.process("Complex query")
+agent = LangGraphAgent()
+result = agent.process("Find me a gaming laptop with good reviews under $1500")
+
+print(result.final_response)
+print(result.reasoning_trace)  # View the ReAct reasoning steps
 ```
 
 ---
@@ -1045,8 +974,8 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## 🙏 Acknowledgments
 
-- **AWS Strands SDK** - Multi-agent framework
-- **Amazon Bedrock** - Foundation model hosting
+- **LangGraph** - Graph-based agent framework
+- **AWS Bedrock** - Foundation model hosting
 - **Streamlit** - Frontend framework
 - **ReAct Paper** - Reasoning paradigm
 - **MemGPT** - Memory-augmented agents
