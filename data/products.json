@@ -1,0 +1,169 @@
+{
+  "products": [
+    {
+      "id": "P001",
+      "name": "UltraBook Pro 15",
+      "category": "Laptops",
+      "price": 1299.99,
+      "description": "High-performance laptop with 16GB RAM, 512GB SSD, perfect for professionals",
+      "features": ["16GB RAM", "512GB SSD", "15.6 inch 4K Display", "Intel i7"],
+      "stock": 45,
+      "rating": 4.5,
+      "tags": ["business", "productivity", "portable"]
+    },
+    {
+      "id": "P002",
+      "name": "Gaming Beast X1",
+      "category": "Laptops",
+      "price": 1899.99,
+      "description": "Ultimate gaming laptop with RTX 4070, 32GB RAM for immersive gaming",
+      "features": ["32GB RAM", "1TB SSD", "RTX 4070", "17.3 inch 144Hz"],
+      "stock": 23,
+      "rating": 4.8,
+      "tags": ["gaming", "high-performance", "graphics"]
+    },
+    {
+      "id": "P003",
+      "name": "Budget Student Laptop",
+      "category": "Laptops",
+      "price": 499.99,
+      "description": "Affordable laptop perfect for students and everyday use",
+      "features": ["8GB RAM", "256GB SSD", "14 inch HD", "Intel i5"],
+      "stock": 120,
+      "rating": 4.2,
+      "tags": ["budget", "student", "everyday"]
+    },
+    {
+      "id": "P004",
+      "name": "Creative Studio Pro",
+      "category": "Laptops",
+      "price": 2199.99,
+      "description": "Designed for video editing and creative professionals with color-accurate display",
+      "features": ["64GB RAM", "2TB SSD", "RTX 4080", "16 inch OLED"],
+      "stock": 15,
+      "rating": 4.9,
+      "tags": ["creative", "video-editing", "professional"]
+    },
+    {
+      "id": "P005",
+      "name": "Wireless Noise-Canceling Headphones",
+      "category": "Audio",
+      "price": 349.99,
+      "description": "Premium headphones with active noise cancellation and 30-hour battery",
+      "features": ["ANC", "30hr Battery", "Bluetooth 5.2", "Hi-Res Audio"],
+      "stock": 89,
+      "rating": 4.7,
+      "tags": ["audio", "wireless", "noise-canceling"]
+    },
+    {
+      "id": "P006",
+      "name": "Smart Home Hub Pro",
+      "category": "Smart Home",
+      "price": 149.99,
+      "description": "Central hub for controlling all your smart home devices",
+      "features": ["Voice Control", "WiFi 6", "Matter Compatible", "Touch Screen"],
+      "stock": 67,
+      "rating": 4.3,
+      "tags": ["smart-home", "automation", "voice-control"]
+    },
+    {
+      "id": "P007",
+      "name": "4K Webcam Ultra",
+      "category": "Accessories",
+      "price": 199.99,
+      "description": "Professional 4K webcam with auto-focus and low-light correction",
+      "features": ["4K Resolution", "Auto Focus", "Built-in Mic", "Low Light"],
+      "stock": 156,
+      "rating": 4.4,
+      "tags": ["webcam", "streaming", "video-calls"]
+    },
+    {
+      "id": "P008",
+      "name": "Mechanical Gaming Keyboard",
+      "category": "Accessories",
+      "price": 159.99,
+      "description": "RGB mechanical keyboard with Cherry MX switches for gaming",
+      "features": ["Cherry MX Red", "RGB Lighting", "Macro Keys", "USB-C"],
+      "stock": 78,
+      "rating": 4.6,
+      "tags": ["gaming", "keyboard", "mechanical"]
+    },
+    {
+      "id": "P009",
+      "name": "Portable Power Bank 20000mAh",
+      "category": "Accessories",
+      "price": 59.99,
+      "description": "High-capacity power bank with fast charging support",
+      "features": ["20000mAh", "65W Fast Charge", "USB-C PD", "LED Display"],
+      "stock": 234,
+      "rating": 4.5,
+      "tags": ["portable", "charging", "travel"]
+    },
+    {
+      "id": "P010",
+      "name": "Ergonomic Office Chair",
+      "category": "Furniture",
+      "price": 449.99,
+      "description": "Premium ergonomic chair with lumbar support for all-day comfort",
+      "features": ["Lumbar Support", "Adjustable Arms", "Mesh Back", "Headrest"],
+      "stock": 34,
+      "rating": 4.7,
+      "tags": ["office", "ergonomic", "comfort"]
+    },
+    {
+      "id": "P011",
+      "name": "27-inch 4K Monitor",
+      "category": "Monitors",
+      "price": 549.99,
+      "description": "Professional 4K monitor with USB-C connectivity and HDR support",
+      "features": ["4K UHD", "USB-C Hub", "HDR400", "IPS Panel"],
+      "stock": 56,
+      "rating": 4.6,
+      "tags": ["monitor", "productivity", "4k"]
+    },
+    {
+      "id": "P012",
+      "name": "Wireless Gaming Mouse",
+      "category": "Accessories",
+      "price": 129.99,
+      "description": "Ultra-responsive wireless gaming mouse with customizable buttons",
+      "features": ["25K DPI", "Wireless", "RGB", "8 Buttons"],
+      "stock": 145,
+      "rating": 4.5,
+      "tags": ["gaming", "mouse", "wireless"]
+    },
+    {
+      "id": "P013",
+      "name": "USB-C Docking Station",
+      "category": "Accessories",
+      "price": 249.99,
+      "description": "Complete docking solution with multiple ports and dual monitor support",
+      "features": ["Dual 4K", "100W PD", "Ethernet", "SD Card"],
+      "stock": 67,
+      "rating": 4.4,
+      "tags": ["dock", "productivity", "usb-c"]
+    },
+    {
+      "id": "P014",
+      "name": "Smart Fitness Watch",
+      "category": "Wearables",
+      "price": 299.99,
+      "description": "Advanced fitness tracker with GPS, heart rate, and sleep monitoring",
+      "features": ["GPS", "Heart Rate", "Sleep Track", "5ATM Water"],
+      "stock": 89,
+      "rating": 4.6,
+      "tags": ["fitness", "smartwatch", "health"]
+    },
+    {
+      "id": "P015",
+      "name": "Tablet Pro 12.9",
+      "category": "Tablets",
+      "price": 1099.99,
+      "description": "Powerful tablet for creative work with stylus support",
+      "features": ["12.9 inch", "M2 Chip", "Stylus Support", "256GB"],
+      "stock": 43,
+      "rating": 4.8,
+      "tags": ["tablet", "creative", "portable"]
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "active_deals": [
+    {
+      "deal_id": "DEAL-001",
+      "name": "New Year Tech Sale",
+      "type": "percentage",
+      "discount_value": 15,
+      "product_ids": ["PROD-001", "PROD-002", "PROD-003"],
+      "category": "Laptops",
+      "start_date": "2025-01-01",
+      "end_date": "2025-01-31",
+      "min_purchase": null,
+      "max_discount": 300,
+      "usage_limit": 1000,
+      "used_count": 342,
+      "status": "active",
+      "stackable": false
+    },
+    {
+      "deal_id": "DEAL-002",
+      "name": "Audio Accessories Bundle",
+      "type": "fixed",
+      "discount_value": 50,
+      "product_ids": ["PROD-004", "PROD-005", "PROD-006"],
+      "category": "Audio",
+      "start_date": "2025-01-10",
+      "end_date": "2025-01-20",
+      "min_purchase": 150,
+      "max_discount": null,
+      "usage_limit": 500,
+      "used_count": 128,
+      "status": "active",
+      "stackable": true
+    },
+    {
+      "deal_id": "DEAL-003",
+      "name": "Wearables Week",
+      "type": "percentage",
+      "discount_value": 20,
+      "product_ids": ["PROD-007", "PROD-008"],
+      "category": "Wearables",
+      "start_date": "2025-01-15",
+      "end_date": "2025-01-22",
+      "min_purchase": null,
+      "max_discount": 100,
+      "usage_limit": 300,
+      "used_count": 45,
+      "status": "active",
+      "stackable": false
+    },
+    {
+      "deal_id": "DEAL-004",
+      "name": "Monitor Madness",
+      "type": "percentage",
+      "discount_value": 25,
+      "product_ids": ["PROD-009", "PROD-010", "PROD-011"],
+      "category": "Monitors",
+      "start_date": "2025-01-05",
+      "end_date": "2025-01-15",
+      "min_purchase": 300,
+      "max_discount": 200,
+      "usage_limit": 200,
+      "used_count": 187,
+      "status": "active",
+      "stackable": false
+    },
+    {
+      "deal_id": "DEAL-005",
+      "name": "Peripherals Pack",
+      "type": "buy_one_get_one",
+      "discount_value": 50,
+      "product_ids": ["PROD-012", "PROD-013"],
+      "category": "Peripherals",
+      "start_date": "2025-01-08",
+      "end_date": "2025-01-25",
+      "min_purchase": null,
+      "max_discount": null,
+      "usage_limit": 400,
+      "used_count": 89,
+      "status": "active",
+      "stackable": false
+    }
+  ],
+  "coupons": [
+    {
+      "coupon_code": "WELCOME10",
+      "description": "10% off for new customers",
+      "type": "percentage",
+      "discount_value": 10,
+      "min_purchase": 50,
+      "max_discount": 100,
+      "valid_from": "2025-01-01",
+      "valid_until": "2025-12-31",
+      "usage_limit_per_user": 1,
+      "total_usage_limit": null,
+      "applicable_categories": ["all"],
+      "status": "active"
+    },
+    {
+      "coupon_code": "TECH25",
+      "description": "$25 off electronics over $200",
+      "type": "fixed",
+      "discount_value": 25,
+      "min_purchase": 200,
+      "max_discount": null,
+      "valid_from": "2025-01-01",
+      "valid_until": "2025-02-28",
+      "usage_limit_per_user": 2,
+      "total_usage_limit": 5000,
+      "applicable_categories": ["Laptops", "Monitors", "Audio"],
+      "status": "active"
+    },
+    {
+      "coupon_code": "FREESHIP",
+      "description": "Free shipping on orders over $75",
+      "type": "free_shipping",
+      "discount_value": 0,
+      "min_purchase": 75,
+      "max_discount": null,
+      "valid_from": "2025-01-01",
+      "valid_until": "2025-06-30",
+      "usage_limit_per_user": 5,
+      "total_usage_limit": null,
+      "applicable_categories": ["all"],
+      "status": "active"
+    },
+    {
+      "coupon_code": "LOYALTY15",
+      "description": "15% off for loyalty members",
+      "type": "percentage",
+      "discount_value": 15,
+      "min_purchase": 100,
+      "max_discount": 150,
+      "valid_from": "2025-01-01",
+      "valid_until": "2025-03-31",
+      "usage_limit_per_user": 3,
+      "total_usage_limit": 10000,
+      "applicable_categories": ["all"],
+      "requires_loyalty": true,
+      "status": "active"
+    },
+    {
+      "coupon_code": "EXPIRED2024",
+      "description": "Holiday sale coupon",
+      "type": "percentage",
+      "discount_value": 30,
+      "min_purchase": null,
+      "max_discount": 200,
+      "valid_from": "2024-12-01",
+      "valid_until": "2024-12-31",
+      "usage_limit_per_user": 1,
+      "total_usage_limit": 1000,
+      "applicable_categories": ["all"],
+      "status": "expired"
+    }
+  ],
+  "price_history": [
+    {
+      "product_id": "PROD-001",
+      "history": [
+        {"date": "2024-10-01", "price": 1299.99},
+        {"date": "2024-11-15", "price": 1249.99},
+        {"date": "2024-11-29", "price": 1099.99, "event": "Black Friday"},
+        {"date": "2024-12-02", "price": 1199.99},
+        {"date": "2025-01-01", "price": 1199.99}
+      ],
+      "lowest_price": 1099.99,
+      "lowest_date": "2024-11-29",
+      "average_price": 1209.99
+    },
+    {
+      "product_id": "PROD-003",
+      "history": [
+        {"date": "2024-10-01", "price": 1899.99},
+        {"date": "2024-11-15", "price": 1849.99},
+        {"date": "2024-11-29", "price": 1599.99, "event": "Black Friday"},
+        {"date": "2024-12-02", "price": 1799.99},
+        {"date": "2025-01-01", "price": 1799.99}
+      ],
+      "lowest_price": 1599.99,
+      "lowest_date": "2024-11-29",
+      "average_price": 1789.99
+    },
+    {
+      "product_id": "PROD-004",
+      "history": [
+        {"date": "2024-10-01", "price": 379.99},
+        {"date": "2024-11-29", "price": 299.99, "event": "Black Friday"},
+        {"date": "2024-12-15", "price": 349.99},
+        {"date": "2025-01-01", "price": 349.99}
+      ],
+      "lowest_price": 299.99,
+      "lowest_date": "2024-11-29",
+      "average_price": 344.99
+    },
+    {
+      "product_id": "PROD-008",
+      "history": [
+        {"date": "2024-10-01", "price": 449.99},
+        {"date": "2024-11-29", "price": 379.99, "event": "Black Friday"},
+        {"date": "2024-12-15", "price": 399.99},
+        {"date": "2025-01-01", "price": 399.99}
+      ],
+      "lowest_price": 379.99,
+      "lowest_date": "2024-11-29",
+      "average_price": 407.49
+    }
+  ],
+  "lightning_deals": [
+    {
+      "deal_id": "LIGHTNING-001",
+      "product_id": "PROD-012",
+      "original_price": 149.99,
+      "deal_price": 99.99,
+      "discount_percentage": 33,
+      "quantity_available": 50,
+      "quantity_claimed": 38,
+      "start_time": "2025-01-14T10:00:00Z",
+      "end_time": "2025-01-14T16:00:00Z",
+      "status": "active"
+    },
+    {
+      "deal_id": "LIGHTNING-002",
+      "product_id": "PROD-007",
+      "original_price": 199.99,
+      "deal_price": 149.99,
+      "discount_percentage": 25,
+      "quantity_available": 100,
+      "quantity_claimed": 67,
+      "start_time": "2025-01-14T14:00:00Z",
+      "end_time": "2025-01-14T20:00:00Z",
+      "status": "active"
+    }
+  ]
+}

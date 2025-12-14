@@ -1,0 +1,320 @@
+{
+  "warehouses": [
+    {
+      "warehouse_id": "WH-001",
+      "name": "East Coast Fulfillment Center",
+      "location": "Newark, NJ",
+      "region": "east",
+      "capacity": 50000,
+      "current_utilization": 0.78
+    },
+    {
+      "warehouse_id": "WH-002",
+      "name": "West Coast Fulfillment Center",
+      "location": "Los Angeles, CA",
+      "region": "west",
+      "capacity": 75000,
+      "current_utilization": 0.82
+    },
+    {
+      "warehouse_id": "WH-003",
+      "name": "Central Distribution Hub",
+      "location": "Dallas, TX",
+      "region": "central",
+      "capacity": 60000,
+      "current_utilization": 0.65
+    },
+    {
+      "warehouse_id": "WH-004",
+      "name": "Southeast Fulfillment Center",
+      "location": "Atlanta, GA",
+      "region": "southeast",
+      "capacity": 40000,
+      "current_utilization": 0.71
+    }
+  ],
+  "inventory": [
+    {
+      "product_id": "PROD-001",
+      "total_stock": 450,
+      "reserved": 23,
+      "available": 427,
+      "reorder_point": 100,
+      "reorder_quantity": 200,
+      "warehouse_distribution": {
+        "WH-001": 150,
+        "WH-002": 120,
+        "WH-003": 100,
+        "WH-004": 80
+      },
+      "last_restock": "2025-01-10",
+      "next_restock_eta": null,
+      "status": "in_stock"
+    },
+    {
+      "product_id": "PROD-002",
+      "total_stock": 85,
+      "reserved": 12,
+      "available": 73,
+      "reorder_point": 50,
+      "reorder_quantity": 100,
+      "warehouse_distribution": {
+        "WH-001": 30,
+        "WH-002": 25,
+        "WH-003": 20,
+        "WH-004": 10
+      },
+      "last_restock": "2025-01-08",
+      "next_restock_eta": null,
+      "status": "in_stock"
+    },
+    {
+      "product_id": "PROD-003",
+      "total_stock": 25,
+      "reserved": 18,
+      "available": 7,
+      "reorder_point": 30,
+      "reorder_quantity": 75,
+      "warehouse_distribution": {
+        "WH-001": 8,
+        "WH-002": 10,
+        "WH-003": 5,
+        "WH-004": 2
+      },
+      "last_restock": "2024-12-28",
+      "next_restock_eta": "2025-01-20",
+      "status": "low_stock"
+    },
+    {
+      "product_id": "PROD-004",
+      "total_stock": 320,
+      "reserved": 45,
+      "available": 275,
+      "reorder_point": 80,
+      "reorder_quantity": 150,
+      "warehouse_distribution": {
+        "WH-001": 100,
+        "WH-002": 90,
+        "WH-003": 70,
+        "WH-004": 60
+      },
+      "last_restock": "2025-01-12",
+      "next_restock_eta": null,
+      "status": "in_stock"
+    },
+    {
+      "product_id": "PROD-005",
+      "total_stock": 0,
+      "reserved": 0,
+      "available": 0,
+      "reorder_point": 100,
+      "reorder_quantity": 200,
+      "warehouse_distribution": {
+        "WH-001": 0,
+        "WH-002": 0,
+        "WH-003": 0,
+        "WH-004": 0
+      },
+      "last_restock": "2024-12-15",
+      "next_restock_eta": "2025-01-25",
+      "status": "out_of_stock",
+      "backorder_count": 47
+    },
+    {
+      "product_id": "PROD-006",
+      "total_stock": 180,
+      "reserved": 15,
+      "available": 165,
+      "reorder_point": 50,
+      "reorder_quantity": 100,
+      "warehouse_distribution": {
+        "WH-001": 60,
+        "WH-002": 50,
+        "WH-003": 40,
+        "WH-004": 30
+      },
+      "last_restock": "2025-01-05",
+      "next_restock_eta": null,
+      "status": "in_stock"
+    },
+    {
+      "product_id": "PROD-007",
+      "total_stock": 520,
+      "reserved": 67,
+      "available": 453,
+      "reorder_point": 150,
+      "reorder_quantity": 300,
+      "warehouse_distribution": {
+        "WH-001": 150,
+        "WH-002": 140,
+        "WH-003": 130,
+        "WH-004": 100
+      },
+      "last_restock": "2025-01-11",
+      "next_restock_eta": null,
+      "status": "in_stock"
+    },
+    {
+      "product_id": "PROD-008",
+      "total_stock": 45,
+      "reserved": 38,
+      "available": 7,
+      "reorder_point": 40,
+      "reorder_quantity": 80,
+      "warehouse_distribution": {
+        "WH-001": 15,
+        "WH-002": 12,
+        "WH-003": 10,
+        "WH-004": 8
+      },
+      "last_restock": "2025-01-02",
+      "next_restock_eta": "2025-01-18",
+      "status": "low_stock"
+    },
+    {
+      "product_id": "PROD-009",
+      "total_stock": 95,
+      "reserved": 8,
+      "available": 87,
+      "reorder_point": 30,
+      "reorder_quantity": 60,
+      "warehouse_distribution": {
+        "WH-001": 30,
+        "WH-002": 25,
+        "WH-003": 25,
+        "WH-004": 15
+      },
+      "last_restock": "2025-01-09",
+      "next_restock_eta": null,
+      "status": "in_stock"
+    },
+    {
+      "product_id": "PROD-010",
+      "total_stock": 68,
+      "reserved": 22,
+      "available": 46,
+      "reorder_point": 25,
+      "reorder_quantity": 50,
+      "warehouse_distribution": {
+        "WH-001": 20,
+        "WH-002": 18,
+        "WH-003": 18,
+        "WH-004": 12
+      },
+      "last_restock": "2025-01-07",
+      "next_restock_eta": null,
+      "status": "in_stock"
+    },
+    {
+      "product_id": "PROD-011",
+      "total_stock": 32,
+      "reserved": 5,
+      "available": 27,
+      "reorder_point": 20,
+      "reorder_quantity": 40,
+      "warehouse_distribution": {
+        "WH-001": 10,
+        "WH-002": 10,
+        "WH-003": 8,
+        "WH-004": 4
+      },
+      "last_restock": "2025-01-06",
+      "next_restock_eta": null,
+      "status": "in_stock"
+    },
+    {
+      "product_id": "PROD-012",
+      "total_stock": 410,
+      "reserved": 34,
+      "available": 376,
+      "reorder_point": 100,
+      "reorder_quantity": 200,
+      "warehouse_distribution": {
+        "WH-001": 120,
+        "WH-002": 110,
+        "WH-003": 100,
+        "WH-004": 80
+      },
+      "last_restock": "2025-01-13",
+      "next_restock_eta": null,
+      "status": "in_stock"
+    },
+    {
+      "product_id": "PROD-013",
+      "total_stock": 285,
+      "reserved": 19,
+      "available": 266,
+      "reorder_point": 75,
+      "reorder_quantity": 150,
+      "warehouse_distribution": {
+        "WH-001": 85,
+        "WH-002": 75,
+        "WH-003": 70,
+        "WH-004": 55
+      },
+      "last_restock": "2025-01-10",
+      "next_restock_eta": null,
+      "status": "in_stock"
+    },
+    {
+      "product_id": "PROD-014",
+      "total_stock": 890,
+      "reserved": 56,
+      "available": 834,
+      "reorder_point": 200,
+      "reorder_quantity": 400,
+      "warehouse_distribution": {
+        "WH-001": 250,
+        "WH-002": 230,
+        "WH-003": 220,
+        "WH-004": 190
+      },
+      "last_restock": "2025-01-12",
+      "next_restock_eta": null,
+      "status": "in_stock"
+    },
+    {
+      "product_id": "PROD-015",
+      "total_stock": 675,
+      "reserved": 41,
+      "available": 634,
+      "reorder_point": 150,
+      "reorder_quantity": 300,
+      "warehouse_distribution": {
+        "WH-001": 200,
+        "WH-002": 180,
+        "WH-003": 160,
+        "WH-004": 135
+      },
+      "last_restock": "2025-01-11",
+      "next_restock_eta": null,
+      "status": "in_stock"
+    }
+  ],
+  "alerts": [
+    {
+      "alert_id": "ALT-001",
+      "type": "low_stock",
+      "product_id": "PROD-003",
+      "message": "Gaming Laptop Pro stock below reorder point",
+      "created_at": "2025-01-13T08:00:00Z",
+      "priority": "high"
+    },
+    {
+      "alert_id": "ALT-002",
+      "type": "out_of_stock",
+      "product_id": "PROD-005",
+      "message": "SportBuds Active out of stock - 47 backorders pending",
+      "created_at": "2025-01-12T10:30:00Z",
+      "priority": "critical"
+    },
+    {
+      "alert_id": "ALT-003",
+      "type": "low_stock",
+      "product_id": "PROD-008",
+      "message": "SmartWatch Ultra stock critically low",
+      "created_at": "2025-01-13T06:15:00Z",
+      "priority": "high"
+    }
+  ]
+}

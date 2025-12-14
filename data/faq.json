@@ -1,0 +1,88 @@
+{
+  "faqs": [
+    {
+      "id": "FAQ001",
+      "question": "What is your return policy?",
+      "answer": "We offer a 30-day return policy for all products. Items must be in original packaging and unused condition. Electronics can be returned within 30 days for a full refund. To initiate a return, contact our support team or use the self-service portal in your account.",
+      "category": "returns",
+      "keywords": ["return", "refund", "policy", "30 days", "money back"]
+    },
+    {
+      "id": "FAQ002",
+      "question": "How long does shipping take?",
+      "answer": "Standard shipping takes 5-7 business days. Express shipping (2-3 business days) is available for an additional fee. Same-day delivery is available in select metro areas for orders placed before 12 PM. Free shipping on orders over $50.",
+      "category": "shipping",
+      "keywords": ["shipping", "delivery", "time", "express", "free shipping"]
+    },
+    {
+      "id": "FAQ003",
+      "question": "How do I track my order?",
+      "answer": "You can track your order by logging into your account and visiting the 'Orders' section. You'll also receive email updates with tracking information once your order ships. For real-time tracking, click the tracking link in your shipping confirmation email.",
+      "category": "orders",
+      "keywords": ["track", "tracking", "order status", "shipment"]
+    },
+    {
+      "id": "FAQ004",
+      "question": "What payment methods do you accept?",
+      "answer": "We accept all major credit cards (Visa, MasterCard, American Express, Discover), PayPal, Apple Pay, Google Pay, and Amazon Pay. We also offer Buy Now, Pay Later options through Affirm and Klarna for qualifying purchases.",
+      "category": "payment",
+      "keywords": ["payment", "credit card", "paypal", "pay", "methods"]
+    },
+    {
+      "id": "FAQ005",
+      "question": "Do you offer warranty on products?",
+      "answer": "Yes! All electronics come with a minimum 1-year manufacturer warranty. We also offer extended warranty plans for 2 or 3 years at checkout. Premium products may include longer standard warranties - check the product page for details.",
+      "category": "warranty",
+      "keywords": ["warranty", "guarantee", "protection", "coverage"]
+    },
+    {
+      "id": "FAQ006",
+      "question": "How do I cancel my order?",
+      "answer": "Orders can be cancelled within 1 hour of placement through your account dashboard. After this window, please contact customer support immediately. Orders that have already shipped cannot be cancelled but can be returned once delivered.",
+      "category": "orders",
+      "keywords": ["cancel", "cancellation", "stop order"]
+    },
+    {
+      "id": "FAQ007",
+      "question": "What if my product arrives damaged?",
+      "answer": "If your product arrives damaged, please contact us within 48 hours with photos of the damage. We'll arrange for a free replacement or full refund. Do not discard the packaging as it may be needed for the carrier claim.",
+      "category": "returns",
+      "keywords": ["damaged", "broken", "defective", "replacement"]
+    },
+    {
+      "id": "FAQ008",
+      "question": "Do you ship internationally?",
+      "answer": "Yes, we ship to over 50 countries worldwide. International shipping typically takes 10-15 business days. Additional customs duties and taxes may apply depending on your country. Check our international shipping page for a full list of supported countries.",
+      "category": "shipping",
+      "keywords": ["international", "global", "overseas", "worldwide"]
+    },
+    {
+      "id": "FAQ009",
+      "question": "How do I contact customer support?",
+      "answer": "You can reach our customer support team via: Live chat (available 24/7), Email at support@store.com (response within 24 hours), Phone at 1-800-SUPPORT (Mon-Fri 9AM-9PM EST), or through our social media channels.",
+      "category": "support",
+      "keywords": ["contact", "support", "help", "customer service", "phone"]
+    },
+    {
+      "id": "FAQ010",
+      "question": "Can I change my shipping address after ordering?",
+      "answer": "Address changes can be made within 1 hour of order placement. After this, changes depend on order status. If not yet shipped, contact support immediately. Once shipped, address changes are not possible - you may need to redirect via the carrier's website.",
+      "category": "shipping",
+      "keywords": ["address", "change", "modify", "update shipping"]
+    },
+    {
+      "id": "FAQ011",
+      "question": "Do you price match?",
+      "answer": "Yes! We offer price matching within 14 days of purchase. We'll match prices from major retailers including Amazon, Best Buy, and Walmart. Contact support with a link to the lower price and we'll refund the difference.",
+      "category": "pricing",
+      "keywords": ["price match", "cheaper", "competitor", "lower price"]
+    },
+    {
+      "id": "FAQ012",
+      "question": "How do I apply a promo code?",
+      "answer": "Enter your promo code in the 'Discount Code' field during checkout, then click 'Apply'. Only one promo code can be used per order. Some codes may have restrictions on eligible products or minimum purchase requirements.",
+      "category": "payment",
+      "keywords": ["promo", "coupon", "discount", "code", "offer"]
+    }
+  ]
+}

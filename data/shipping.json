@@ -1,0 +1,279 @@
+{
+  "carriers": [
+    {
+      "carrier_id": "CAR-001",
+      "name": "UPS",
+      "code": "ups",
+      "tracking_url_template": "https://www.ups.com/track?tracknum={tracking_number}",
+      "services": [
+        {
+          "service_id": "UPS-GND",
+          "name": "UPS Ground",
+          "delivery_days": {"min": 3, "max": 7},
+          "base_price": 8.99,
+          "per_lb_price": 0.50
+        },
+        {
+          "service_id": "UPS-3DAY",
+          "name": "UPS 3 Day Select",
+          "delivery_days": {"min": 3, "max": 3},
+          "base_price": 15.99,
+          "per_lb_price": 0.75
+        },
+        {
+          "service_id": "UPS-2DAY",
+          "name": "UPS 2nd Day Air",
+          "delivery_days": {"min": 2, "max": 2},
+          "base_price": 22.99,
+          "per_lb_price": 1.00
+        },
+        {
+          "service_id": "UPS-NEXT",
+          "name": "UPS Next Day Air",
+          "delivery_days": {"min": 1, "max": 1},
+          "base_price": 34.99,
+          "per_lb_price": 1.50
+        }
+      ]
+    },
+    {
+      "carrier_id": "CAR-002",
+      "name": "FedEx",
+      "code": "fedex",
+      "tracking_url_template": "https://www.fedex.com/fedextrack/?trknbr={tracking_number}",
+      "services": [
+        {
+          "service_id": "FDX-GND",
+          "name": "FedEx Ground",
+          "delivery_days": {"min": 3, "max": 7},
+          "base_price": 9.49,
+          "per_lb_price": 0.45
+        },
+        {
+          "service_id": "FDX-EXP",
+          "name": "FedEx Express Saver",
+          "delivery_days": {"min": 3, "max": 3},
+          "base_price": 16.99,
+          "per_lb_price": 0.80
+        },
+        {
+          "service_id": "FDX-2DAY",
+          "name": "FedEx 2Day",
+          "delivery_days": {"min": 2, "max": 2},
+          "base_price": 24.99,
+          "per_lb_price": 1.10
+        },
+        {
+          "service_id": "FDX-OVERNIGHT",
+          "name": "FedEx Priority Overnight",
+          "delivery_days": {"min": 1, "max": 1},
+          "base_price": 39.99,
+          "per_lb_price": 1.75
+        }
+      ]
+    },
+    {
+      "carrier_id": "CAR-003",
+      "name": "USPS",
+      "code": "usps",
+      "tracking_url_template": "https://tools.usps.com/go/TrackConfirmAction?tLabels={tracking_number}",
+      "services": [
+        {
+          "service_id": "USPS-FC",
+          "name": "USPS First Class",
+          "delivery_days": {"min": 2, "max": 5},
+          "base_price": 4.99,
+          "per_lb_price": 0.35,
+          "max_weight": 13
+        },
+        {
+          "service_id": "USPS-PRIORITY",
+          "name": "USPS Priority Mail",
+          "delivery_days": {"min": 1, "max": 3},
+          "base_price": 8.99,
+          "per_lb_price": 0.55
+        },
+        {
+          "service_id": "USPS-EXPRESS",
+          "name": "USPS Priority Mail Express",
+          "delivery_days": {"min": 1, "max": 2},
+          "base_price": 26.99,
+          "per_lb_price": 1.25
+        }
+      ]
+    },
+    {
+      "carrier_id": "CAR-004",
+      "name": "Amazon Logistics",
+      "code": "amzl",
+      "tracking_url_template": "https://track.amazon.com/tracking/{tracking_number}",
+      "services": [
+        {
+          "service_id": "AMZL-STD",
+          "name": "Amazon Standard",
+          "delivery_days": {"min": 3, "max": 5},
+          "base_price": 5.99,
+          "per_lb_price": 0.30
+        },
+        {
+          "service_id": "AMZL-PRIME",
+          "name": "Prime Free Shipping",
+          "delivery_days": {"min": 2, "max": 2},
+          "base_price": 0,
+          "per_lb_price": 0,
+          "requires_prime": true
+        },
+        {
+          "service_id": "AMZL-SAMEDAY",
+          "name": "Same-Day Delivery",
+          "delivery_days": {"min": 0, "max": 0},
+          "base_price": 12.99,
+          "per_lb_price": 0,
+          "requires_prime": true,
+          "cutoff_time": "12:00"
+        }
+      ]
+    }
+  ],
+  "delivery_slots": [
+    {
+      "slot_id": "SLOT-001",
+      "date": "2025-01-15",
+      "time_window": "8:00 AM - 12:00 PM",
+      "available": true,
+      "premium": false,
+      "extra_cost": 0
+    },
+    {
+      "slot_id": "SLOT-002",
+      "date": "2025-01-15",
+      "time_window": "12:00 PM - 4:00 PM",
+      "available": true,
+      "premium": false,
+      "extra_cost": 0
+    },
+    {
+      "slot_id": "SLOT-003",
+      "date": "2025-01-15",
+      "time_window": "4:00 PM - 8:00 PM",
+      "available": true,
+      "premium": true,
+      "extra_cost": 3.99
+    },
+    {
+      "slot_id": "SLOT-004",
+      "date": "2025-01-16",
+      "time_window": "8:00 AM - 12:00 PM",
+      "available": true,
+      "premium": false,
+      "extra_cost": 0
+    },
+    {
+      "slot_id": "SLOT-005",
+      "date": "2025-01-16",
+      "time_window": "12:00 PM - 4:00 PM",
+      "available": false,
+      "premium": false,
+      "extra_cost": 0,
+      "unavailable_reason": "Fully booked"
+    },
+    {
+      "slot_id": "SLOT-006",
+      "date": "2025-01-16",
+      "time_window": "4:00 PM - 8:00 PM",
+      "available": true,
+      "premium": true,
+      "extra_cost": 3.99
+    }
+  ],
+  "shipping_zones": [
+    {
+      "zone_id": "ZONE-1",
+      "name": "Local",
+      "description": "Same state as warehouse",
+      "ground_days": 2,
+      "surcharge": 0
+    },
+    {
+      "zone_id": "ZONE-2",
+      "name": "Regional",
+      "description": "Neighboring states",
+      "ground_days": 3,
+      "surcharge": 0
+    },
+    {
+      "zone_id": "ZONE-3",
+      "name": "National",
+      "description": "Cross-country",
+      "ground_days": 5,
+      "surcharge": 2.99
+    },
+    {
+      "zone_id": "ZONE-4",
+      "name": "Remote",
+      "description": "Alaska, Hawaii, territories",
+      "ground_days": 7,
+      "surcharge": 9.99
+    }
+  ],
+  "tracking_events": {
+    "ORD-1003": [
+      {
+        "timestamp": "2025-01-14T08:00:00Z",
+        "status": "label_created",
+        "description": "Shipping label created",
+        "location": "Newark, NJ"
+      },
+      {
+        "timestamp": "2025-01-14T14:30:00Z",
+        "status": "picked_up",
+        "description": "Package picked up by carrier",
+        "location": "Newark, NJ Fulfillment Center"
+      },
+      {
+        "timestamp": "2025-01-14T22:15:00Z",
+        "status": "in_transit",
+        "description": "Departed facility",
+        "location": "Newark, NJ Distribution Center"
+      },
+      {
+        "timestamp": "2025-01-15T06:45:00Z",
+        "status": "in_transit",
+        "description": "Arrived at facility",
+        "location": "Memphis, TN Hub"
+      },
+      {
+        "timestamp": "2025-01-15T11:20:00Z",
+        "status": "in_transit",
+        "description": "Departed facility",
+        "location": "Memphis, TN Hub"
+      },
+      {
+        "timestamp": "2025-01-15T18:00:00Z",
+        "status": "out_for_delivery",
+        "description": "Out for delivery",
+        "location": "Local Delivery Station"
+      }
+    ],
+    "ORD-1004": [
+      {
+        "timestamp": "2025-01-13T10:00:00Z",
+        "status": "label_created",
+        "description": "Shipping label created",
+        "location": "Los Angeles, CA"
+      },
+      {
+        "timestamp": "2025-01-13T16:00:00Z",
+        "status": "picked_up",
+        "description": "Package picked up",
+        "location": "Los Angeles, CA Fulfillment Center"
+      },
+      {
+        "timestamp": "2025-01-14T02:30:00Z",
+        "status": "in_transit",
+        "description": "In transit to destination",
+        "location": "Phoenix, AZ Sort Facility"
+      }
+    ]
+  }
+}
