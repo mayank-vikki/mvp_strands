@@ -24,9 +24,10 @@
 - [Installation](#-installation)
 - [Configuration](#-configuration)
 - [Orchestration Modes](#-orchestration-modes)
-  - [Mode 1: Agents-as-Tools (Default)](#mode-1-agents-as-tools-default)
-  - [Mode 2: Swarm Orchestration](#mode-2-swarm-orchestration)
-  - [Mode 3: LangGraph Agent](#mode-3-langgraph-agent-advanced-autonomous)
+  - [Mode 1: LangGraph Agent (Agentic)](#mode-1-langgraph-agent-agentic--advanced-autonomous)
+  - [Mode 2: Agents-as-Tools (Default)](#mode-2-agents-as-tools-default)
+  - [Mode 3: Swarm Orchestration](#mode-3-swarm-orchestration)
+  - [Mode 4: Graph Workflows](#mode-4-graph-workflows)
 - [Components Deep Dive](#-components-deep-dive)
 - [Data Flow](#-data-flow)
 - [Usage](#-usage)
@@ -82,10 +83,11 @@ Reviews Tools     → get_product_reviews, get_rating_summary, search_reviews, g
 Logistics Tools   → get_shipping_options, get_detailed_tracking, get_delivery_slots, calculate_shipping_cost, get_carrier_info
 ```
 
-### 🧠 3 Orchestration Patterns
-1. **Agents-as-Tools** - Supervisor routes queries to specialists
-2. **Swarm** - Agents self-organize with dynamic handoffs
-3. **LangGraph Agent** - Advanced agentic reasoning with graph-based workflows and ReAct patterns
+### 🧠 4 Orchestration Patterns
+1. **LangGraph Agent (Agentic)** - Advanced agentic reasoning with graph-based workflows and ReAct patterns
+2. **Agents-as-Tools** - Supervisor routes queries to specialists
+3. **Swarm** - Agents self-organize with dynamic handoffs
+4. **Graph Workflows** - Deterministic pipelines with predefined execution order
 
 ---
 
@@ -303,7 +305,220 @@ This system supports **4 distinct orchestration patterns**, each with different 
 
 ---
 
-### Mode 1: Agents-as-Tools (Default)
+### Mode 1: LangGraph Agent (Agentic - Advanced Autonomous)
+
+**Pattern**: Graph-based agentic reasoning with ReAct patterns and built-in state management.
+
+LangGraph provides a powerful framework for building autonomous agents with:
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                   USER QUERY                                  │
+│  "Help me find a gaming laptop that's in stock and under     │
+│   $1500 with good reviews"                                   │
+└───────────────────────────┬──────────────────────────────────┘
+                            │
+                            ▼
+┌──────────────────────────────────────────────────────────────┐
+│              🔷 LANGGRAPH AGENT                               │
+│                                                               │
+│  Graph-Based Workflow:                                        │
+│                                                               │
+│  ┌────────────────────────────────────────────────────────┐  │
+│  │  THOUGHT → ACTION → OBSERVATION LOOP                   │  │
+│  │  (Powered by LangGraph's cyclic execution)             │  │
+│  │                                                         │  │
+│  │  • Explicit reasoning step before each action           │  │
+│  │  • Access to specialized agent tools                   │  │
+│  │  • Dynamic routing based on observations               │  │
+│  │  • Built-in state management across steps              │  │
+│  └────────────────────────────────────────────────────────┘  │
+│                            │                                  │
+│                            ▼                                  │
+│  ┌────────────────────────────────────────────────────────┐  │
+│  │  Step 1: SEARCH PRODUCTS                               │  │
+│  │  ─────────────────────────────                         │  │
+│  │  THOUGHT: "I need to find gaming laptops under $1500"  │  │
+│  │  ACTION: search_products("gaming laptop", max_price=1500) │
+│  │  OBSERVATION: "Found 5 laptops matching criteria"      │  │
+│  └────────────────────────────────────────────────────────┘  │
+│                            │                                  │
+│                            ▼                                  │
+│  ┌────────────────────────────────────────────────────────┐  │
+│  │  Step 2: CHECK STOCK & REVIEWS                         │  │
+│  │  ──────────────────────────                            │  │
+│  │  THOUGHT: "Let me verify stock and check reviews"      │  │
+│  │  ACTION: check_stock_availability(product_ids)         │  │
+│  │  ACTION: get_product_reviews(product_ids)              │  │
+│  │  OBSERVATION: "3 in stock with 4.5+ star ratings"      │  │
+│  └────────────────────────────────────────────────────────┘  │
+│                            │                                  │
+│                            ▼                                  │
+│  ┌────────────────────────────────────────────────────────┐  │
+│  │  Step 3: FINAL RECOMMENDATION                          │  │
+│  │  ───────────────────────────────                       │  │
+│  │  THOUGHT: "Based on all criteria, recommend the best"  │  │
+│  │  ACTION: generate_recommendation()                     │  │
+│  │  RESULT: Return ranked options with reasoning          │  │
+│  └────────────────────────────────────────────────────────┘  │
+│                                                               │
+└───────────────────────────┬──────────────────────────────────┘
+                            │
+                            ▼
+┌──────────────────────────────────────────────────────────────┐
+│                    RESPONSE                                   │
+│                                                               │
+│  "Based on my analysis:                                      │
+│                                                               │
+│   🏆 Top Pick: Gaming Pro X1                                 │
+│      • Price: $1,299 (within budget)                         │
+│      • Reviews: 4.7/5 stars                                 │
+│      • Stock: 12 units available                             │
+│      • Best gaming specs in your budget"                     │
+└──────────────────────────────────────────────────────────────┘
+```
+
+**Graph Visualization - Internal LangGraph Workflow:**
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           LANGGRAPH EXECUTION FLOW                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+START
+  │
+  ▼
+┌──────────────────┐
+│  analyze_query   │
+└────────┬─────────┘
+         │
+    [route_by_mode]
+    ╱            ╲
+   ╱              ╲
+  ▼                ▼
+┌────────────┐  ┌─────────────┐
+│  simple_   │  │   react_    │◄───────────────┐
+│  response  │  │   reason    │                │
+└─────┬──────┘  └──────┬──────┘                │
+      │                │                       │
+      │       [should_continue_react]          │
+      │          ╱           ╲                 │
+      │         ╱             ╲                │
+      │        ▼               ▼               │
+      │  ┌───────────┐  ┌─────────────┐        │
+      │  │ execute_  │  │  synthesize │        │
+      │  │   tools   │──┤             │        │
+      │  └─────┬─────┘  └──────┬──────┘        │
+      │        │               │               │
+      │        └───────────────┼───────────────┘
+      │                        │
+      │                        ▼
+      │                ┌─────────────┐
+      │                │   reflect   │◄───┐
+      │                └──────┬──────┘    │
+      │                       │           │
+      │           [should_continue_reflection]
+      │                  ╱          ╲     │
+      │                 ╱            ╲    │
+      │                ▼              └───┘
+      │        ┌─────────────┐
+      └───────►│update_memory│
+               └──────┬──────┘
+                      │
+                      ▼
+                    END
+```
+
+**Key Features:**
+- ✅ Graph-based workflow execution
+- ✅ Built-in state management (TypedDict)
+- ✅ ReAct pattern (Thought → Action → Observation)
+- ✅ Cyclic reasoning loops (not just linear chains)
+- ✅ Conditional routing and dynamic handoffs
+- ✅ Reflection & self-critique for quality improvement
+- ✅ Human-in-the-loop support
+- ✅ Explainable AI with reasoning traces
+
+**Characteristics:**
+- ✅ Complex, multi-step tasks
+- ✅ Quality-focused reasoning
+- ✅ Explainable decision-making
+- ✅ Adaptive problem-solving
+- ❌ Higher latency
+- ❌ Higher token usage
+
+**When to Use:**
+- Complex, multi-step research tasks
+- When quality matters more than speed
+- When you need explainable AI decisions
+- Deep analysis and comparison queries
+- Multi-domain problem solving
+
+**Implementation:**
+- Location: `agentic/langgraph_agent.py`
+- Full template: [Agentic.md](Agentic.md)
+
+**Code Flow:**
+```python
+# src/agentic/langgraph_agent.py
+
+from langgraph.graph import StateGraph, END, START
+from typing import TypedDict, Annotated
+import operator
+from langchain_core.messages import BaseMessage
+
+class AgentState(TypedDict):
+    """Graph state - single source of truth"""
+    messages: Annotated[list, operator.add]  # Accumulates
+    current_query: str
+    reasoning_trace: list
+    final_response: str
+    should_continue: bool
+
+def create_agent_graph():
+    """Build the LangGraph workflow"""
+    workflow = StateGraph(AgentState)
+    
+    # Add nodes (each transforms state)
+    workflow.add_node("analyze", analyze_query)
+    workflow.add_node("reason", react_reasoner)
+    workflow.add_node("execute", tool_executor)
+    workflow.add_node("synthesize", response_synthesizer)
+    workflow.add_node("reflect", self_reflector)
+    
+    # Add edges (transitions)
+    workflow.add_edge(START, "analyze")
+    workflow.add_conditional_edges(
+        "analyze",
+        route_by_mode,
+        {"simple": "synthesize", "complex": "reason"}
+    )
+    workflow.add_edge("reason", "execute")
+    workflow.add_conditional_edges(
+        "execute",
+        should_continue_react,
+        {"continue": "reason", "done": "synthesize"}
+    )
+    workflow.add_edge("synthesize", "reflect")
+    workflow.add_conditional_edges(
+        "reflect",
+        should_continue_reflection,
+        {"improve": "synthesize", "approve": "end"}
+    )
+    workflow.add_edge("end", END)
+    
+    # Compile with checkpointer for memory
+    return workflow.compile(checkpointer=MemorySaver())
+
+agent = create_agent_graph()
+result = agent.invoke({"current_query": "Your query"})
+print(result["final_response"])
+print(result["reasoning_trace"])  # View all reasoning steps
+```
+
+---
+
+### Mode 2: Agents-as-Tools (Default)
 
 **Pattern**: Centralized routing with supervisor as the single point of control.
 
@@ -396,7 +611,7 @@ def get_customer_assistant():
 
 ---
 
-### Mode 2: Swarm Orchestration
+### Mode 3: Swarm Orchestration
 
 **Pattern**: Decentralized, self-organizing agents with dynamic handoffs.
 
@@ -512,7 +727,7 @@ def create_customer_swarm():
 
 ---
 
-### Mode 3: Graph Workflows
+### Mode 4: Graph Workflows
 
 **Pattern**: Deterministic pipelines with predefined execution order.
 
@@ -648,102 +863,6 @@ def create_order_workflow():
     
     return builder.build()
 ```
-
----
-
-### Mode 3: LangGraph Agent (Advanced Autonomous)
-
-**Pattern**: Graph-based agentic reasoning with ReAct patterns and built-in state management.
-
-LangGraph provides a powerful framework for building autonomous agents with:
-
-```
-┌──────────────────────────────────────────────────────────────┐
-│                   USER QUERY                                  │
-│  "Help me find a gaming laptop that's in stock and under     │
-│   $1500 with good reviews"                                   │
-└───────────────────────────┬──────────────────────────────────┘
-                            │
-                            ▼
-┌──────────────────────────────────────────────────────────────┐
-│              🔷 LANGGRAPH AGENT                               │
-│                                                               │
-│  Graph-Based Workflow:                                        │
-│                                                               │
-│  ┌────────────────────────────────────────────────────────┐  │
-│  │  THOUGHT → ACTION → OBSERVATION LOOP                   │  │
-│  │  (Powered by LangGraph's cyclic execution)             │  │
-│  │                                                         │  │
-│  │  • Explicit reasoning step before each action           │  │
-│  │  • Access to specialized agent tools                   │  │
-│  │  • Dynamic routing based on observations               │  │
-│  │  • Built-in state management across steps              │  │
-│  └────────────────────────────────────────────────────────┘  │
-│                            │                                  │
-│                            ▼                                  │
-│  ┌────────────────────────────────────────────────────────┐  │
-│  │  Step 1: SEARCH PRODUCTS                               │  │
-│  │  ─────────────────────────────                         │  │
-│  │  THOUGHT: "I need to find gaming laptops under $1500"  │  │
-│  │  ACTION: search_products("gaming laptop", max_price=1500) │
-│  │  OBSERVATION: "Found 5 laptops matching criteria"      │  │
-│  └────────────────────────────────────────────────────────┘  │
-│                            │                                  │
-│                            ▼                                  │
-│  ┌────────────────────────────────────────────────────────┐  │
-│  │  Step 2: CHECK STOCK & REVIEWS                         │  │
-│  │  ──────────────────────────                            │  │
-│  │  THOUGHT: "Let me verify stock and check reviews"      │  │
-│  │  ACTION: check_stock_availability(product_ids)         │  │
-│  │  ACTION: get_product_reviews(product_ids)              │  │
-│  │  OBSERVATION: "3 in stock with 4.5+ star ratings"      │  │
-│  └────────────────────────────────────────────────────────┘  │
-│                            │                                  │
-│                            ▼                                  │
-│  ┌────────────────────────────────────────────────────────┐  │
-│  │  Step 3: FINAL RECOMMENDATION                          │  │
-│  │  ───────────────────────────────                       │  │
-│  │  THOUGHT: "Based on all criteria, recommend the best"  │  │
-│  │  ACTION: generate_recommendation()                     │  │
-│  │  RESULT: Return ranked options with reasoning          │  │
-│  └────────────────────────────────────────────────────────┘  │
-│                                                               │
-└───────────────────────────┬──────────────────────────────────┘
-                            │
-                            ▼
-┌──────────────────────────────────────────────────────────────┐
-│                    RESPONSE                                   │
-│                                                               │
-│  "Based on my analysis:                                      │
-│                                                               │
-│   🏆 Top Pick: Gaming Pro X1                                 │
-│      • Price: $1,299 (within budget)                         │
-│      • Reviews: 4.7/5 stars                                 │
-│      • Stock: 12 units available                             │
-│      • Best gaming specs in your budget"                     │
-└──────────────────────────────────────────────────────────────┘
-```
-
-**LangGraph Features:**
-- ✅ Graph-based workflow execution
-- ✅ Built-in state management
-- ✅ ReAct pattern (Thought → Action → Observation)
-- ✅ Cyclic reasoning loops (not just linear chains)
-- ✅ Conditional routing and dynamic handoffs
-- ✅ Human-in-the-loop support
-
-**Implementation:**
-- `agentic/langgraph_agent.py` - Complete LangGraph-powered agent
-
-- ✅ Context-aware across sessions
-- ❌ Higher latency
-- ❌ Higher token usage
-
-**When to Use:**
-- Complex, multi-step tasks
-- When quality matters more than speed
-- Research and analysis queries
-- When you need explainable AI decisions
 
 ---
 
