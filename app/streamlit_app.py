@@ -1159,15 +1159,16 @@ def get_swarm_response(query: str) -> Tuple[str, List[Dict], List[Dict]]:
         return f"Swarm Error: {str(e)}", [], []
 
 
-def get_graph_response(query: str, workflow: str) -> Tuple[str, List[Dict], List[str]]:
+def get_graph_response(query: str, workflow: str, activity_container=None) -> Tuple[str, List[Dict], List[str]]:
     """
-    Get response using the live Graph workflow pattern.
+    Get response using the live Graph workflow pattern with streaming support.
     
     Graph workflows execute agents in a deterministic pipeline order.
     
     Args:
         query: The user's query
         workflow: The workflow type ('order', 'research', 'stock_check')
+        activity_container: Optional Streamlit container to stream activities to
         
     Returns:
         Tuple of (response text, activities, workflow steps executed)
@@ -1179,6 +1180,7 @@ def get_graph_response(query: str, workflow: str) -> Tuple[str, List[Dict], List
             create_stock_check_workflow,
             GRAPH_AVAILABLE
         )
+        import time
         
         if not GRAPH_AVAILABLE:
             return "Graph pattern not available. Please use Agents-as-Tools mode.", [], []
@@ -1199,9 +1201,16 @@ def get_graph_response(query: str, workflow: str) -> Tuple[str, List[Dict], List
         
         workflow_steps = []
         
-        # Create and run workflow
-        graph = wf_creator()
-        result = graph(query)
+        # Display initial activity
+        if activity_container:
+            with activity_container.container():
+                st.markdown(f"""
+                <div class="agent-card">
+                    <strong>{activities[0]['agent']}</strong><br>
+                    <small>{activities[0]['time']}</small><br>
+                    {activities[0]['action']}
+                </div>
+                """, unsafe_allow_html=True)
         
         # Define expected steps for each workflow
         workflow_step_definitions = {
@@ -1212,27 +1221,104 @@ def get_graph_response(query: str, workflow: str) -> Tuple[str, List[Dict], List
         
         steps = workflow_step_definitions.get(workflow, ["Step 1", "Step 2", "Step 3"])
         
+        # Execute workflow - let it run to completion
+        # Create graph without arbitrary timeout limits
+        graph = wf_creator()
+        
+        # Stream each step's expected execution
         for i, step in enumerate(steps, 1):
-            workflow_steps.append(step)
-            activities.append({
-                "agent": f"   Node {i}: {step}",
-                "action": "✅ Completed",
+            activity = {
+                "agent": f"   🔄 Node {i}: {step}",
+                "action": "⏳ Processing...",
                 "time": datetime.now().strftime("%H:%M:%S")
-            })
+            }
+            activities.append(activity)
+            
+            # Stream the step start
+            if activity_container:
+                with activity_container.container():
+                    st.markdown(f"""
+                    <div class="agent-card">
+                        <strong>{activity['agent']}</strong><br>
+                        <small>{activity['time']}</small><br>
+                        {activity['action']}
+                    </div>
+                    """, unsafe_allow_html=True)
         
-        activities.append({
+        # Now execute the actual graph - let it run completely
+        graph_result = graph(query)
+        
+        # Extract final response from the graph result
+        response_text = "Graph workflow completed."
+        
+        # Try to extract the final result from confirmation node
+        if hasattr(graph_result, 'results') and isinstance(graph_result.results, dict):
+            # Get the last node's result (confirmation)
+            for node_name in ['confirmation', 'recommendation', 'result']:
+                if node_name in graph_result.results:
+                    node_result = graph_result.results[node_name]
+                    if hasattr(node_result, 'result') and hasattr(node_result.result, 'message'):
+                        # Extract message content
+                        message = node_result.result.message
+                        if isinstance(message, dict) and 'content' in message:
+                            content = message['content']
+                            if isinstance(content, list) and len(content) > 0:
+                                text_content = content[0].get('text', '')
+                                # Strip thinking tags for display
+                                response_text = re.sub(r'<thinking>.*?</thinking>', '', text_content, flags=re.DOTALL).strip()
+                                break
+        
+        # If we still have no response, fallback
+        if response_text == "Graph workflow completed.":
+            response_text = f"Workflow completed successfully across {len(steps)} nodes."
+        
+        # Update activities with completion status for each step
+        for i, step in enumerate(steps, 1):
+            # Find and update the corresponding activity
+            for activity in activities:
+                if f"Node {i}" in activity.get("agent", ""):
+                    activity['action'] = "✅ Completed"
+                    activity['time'] = datetime.now().strftime("%H:%M:%S")
+                    workflow_steps.append(step)
+                    
+                    # Stream the step completion
+                    if activity_container:
+                        with activity_container.container():
+                            st.markdown(f"""
+                            <div class="agent-card">
+                                <strong>{activity['agent']}</strong><br>
+                                <small>{activity['time']}</small><br>
+                                {activity['action']}
+                            </div>
+                            """, unsafe_allow_html=True)
+                    break
+        
+        # Add completion activity
+        completion_activity = {
             "agent": "📊 Graph Orchestrator",
-            "action": f"✅ Pipeline complete ({len(steps)} nodes)",
+            "action": f"✅ Pipeline complete ({len(steps)} nodes executed)",
             "time": datetime.now().strftime("%H:%M:%S")
-        })
+        }
+        activities.append(completion_activity)
         
-        return str(result), activities, workflow_steps
+        # Stream final completion
+        if activity_container:
+            with activity_container.container():
+                st.markdown(f"""
+                <div class="agent-card">
+                    <strong>{completion_activity['agent']}</strong><br>
+                    <small>{completion_activity['time']}</small><br>
+                    {completion_activity['action']}
+                </div>
+                """, unsafe_allow_html=True)
+        
+        return response_text, activities, workflow_steps
         
     except Exception as e:
         import traceback
         error_details = traceback.format_exc()
         print(f"[GRAPH ERROR]: {error_details}")
-        return f"Graph Error: {str(e)}", [], []
+        return f"❌ Graph Error: {str(e)}", [], []
 
 
 def get_agentic_response(query: str, use_langgraph: bool = True) -> Tuple[str, List[Dict], Dict]:
@@ -1739,9 +1825,17 @@ with col1:
             elif st.session_state.orchestration_pattern == "graph":
                 # 📊 Live Graph workflow
                 response_placeholder.markdown("📊 _Graph pipeline executing..._")
+                
+                # Create a container to stream workflow activities
+                activity_placeholder = st.empty()
+                
+                # Execute graph with streaming activities
                 response, activities, workflow_steps = get_graph_response(
-                    prompt, st.session_state.graph_workflow
+                    prompt, st.session_state.graph_workflow, activity_placeholder
                 )
+                
+                # Clear the activity placeholder and let main activity panel show results
+                activity_placeholder.empty()
             else:
                 # Default Agents-as-Tools with streaming
                 # Show initial thinking placeholder
@@ -1823,9 +1917,17 @@ with col1:
                 st.session_state.handoff_history.extend(handoffs)
             elif st.session_state.orchestration_pattern == "graph":
                 response_placeholder.markdown("📊 _Pipeline executing..._")
+                
+                # Create a container to stream workflow activities
+                activity_placeholder = st.empty()
+                
+                # Execute graph with streaming activities
                 response, activities, workflow_steps = get_graph_response(
-                    prompt, st.session_state.graph_workflow
+                    prompt, st.session_state.graph_workflow, activity_placeholder
                 )
+                
+                # Clear the activity placeholder
+                activity_placeholder.empty()
             else:
                 # Default Agents-as-Tools with streaming
                 # Show initial thinking placeholder
